@@ -1,0 +1,33 @@
+{
+  "building_count": 55,
+  "layer_count": 56,
+  "environment_layer": "环境",
+  "native_closed_extrusions": 68,
+  "3ds_object_count": 78,
+  "vertices": 13382,
+  "triangles": 23368,
+  "tree_count": 357,
+  "units": "meters",
+  "origin_wgs84": [
+    108.646,
+    34.251
+  ],
+  "origin_utm49n": [
+    283232.148365233,
+    3792493.9832230504
+  ],
+  "scope_area_m2": 991199.5102851515,
+  "campus_osm_area_m2": 822774.5047874721,
+  "scope_bounds_m": [
+    -57.72420664646489,
+    45.59548470883886,
+    1181.753096205512,
+    1374.1882134421908
+  ],
+  "max_height_m": 88.8,
+  "height_estimated_building_count": 5,
+  "height_source": "https://24959527.s21i.faiusr.com/61/ABUIABA9GAAgn5zYpQYowILN7gI.pdf",
+  "precision": "Metric projection of public map footprints; no survey accuracy certification",
+  "ground": "Flat relative Z=0; no surveyed elevation or terrain surface",
+  "environment": "Mapped road centerlines, green/water/plaza boundaries; road widths and tree locations are approximate"
+}

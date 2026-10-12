@@ -1,0 +1,704 @@
+{
+  "A01_00": {
+    "layer": "A01_和园A01宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "A02_00": {
+    "layer": "A02_和园A02宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "A03_00": {
+    "layer": "A03_和园A03宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "A04_00": {
+    "layer": "A04_和园A04宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "A05_00": {
+    "layer": "A05_和园A05宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "A06_00": {
+    "layer": "A06_和园A06宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "A07_00": {
+    "layer": "A07_和园A07宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "A08_00": {
+    "layer": "A08_和园A08宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "A09_00": {
+    "layer": "A09_和园A09宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "A10_00": {
+    "layer": "A10_和园A10宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B001_00": {
+    "layer": "B001_敏行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B001_01": {
+    "layer": "B001_敏行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B001_02": {
+    "layer": "B001_敏行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B002_00": {
+    "layer": "B002_力行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B002_01": {
+    "layer": "B002_力行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B002_02": {
+    "layer": "B002_力行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B002_03": {
+    "layer": "B002_力行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B003_00": {
+    "layer": "B003_躬行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B003_01": {
+    "layer": "B003_躬行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B003_02": {
+    "layer": "B003_躬行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B003_03": {
+    "layer": "B003_躬行楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B004_00": {
+    "layer": "B004_泓理楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B004_01": {
+    "layer": "B004_泓理楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B005_00": {
+    "layer": "B005_涵英楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B005_01": {
+    "layer": "B005_涵英楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B005_02": {
+    "layer": "B005_涵英楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B005_03": {
+    "layer": "B005_涵英楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B005_04": {
+    "layer": "B005_涵英楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B006_00": {
+    "layer": "B006_米兰楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B007_00": {
+    "layer": "B007_居源楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B008_00": {
+    "layer": "B008_高等工程教育博物馆",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B009_00": {
+    "layer": "B009_阅览中心",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B01_00": {
+    "layer": "B01_惠园B01宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B015_00": {
+    "layer": "B015_和鸣苑",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B016_00": {
+    "layer": "B016_惠风苑",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B017_00": {
+    "layer": "B017_朗清苑",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B018_00": {
+    "layer": "B018_泓生楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B019_00": {
+    "layer": "B019_泓德楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B02_00": {
+    "layer": "B02_惠园B02宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B020_00": {
+    "layer": "B020_泓仁楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B021_00": {
+    "layer": "B021_泓润楼",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B022_00": {
+    "layer": "B022_动物实验中心",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B023_00": {
+    "layer": "B023_同和苑",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B03_00": {
+    "layer": "B03_惠园B03宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B04_00": {
+    "layer": "B04_惠园B04宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B05_00": {
+    "layer": "B05_惠园B05宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B06_00": {
+    "layer": "B06_惠园B06宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B07_00": {
+    "layer": "B07_惠园B07宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B08_00": {
+    "layer": "B08_惠园B08宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B09_00": {
+    "layer": "B09_惠园B09宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B10_00": {
+    "layer": "B10_惠园B10宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B11_00": {
+    "layer": "B11_惠园B11宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "B12_00": {
+    "layer": "B12_惠园B12宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C01_00": {
+    "layer": "C01_朗园C01宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C02_00": {
+    "layer": "C02_朗园C02宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C03_00": {
+    "layer": "C03_朗园C03宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C04_00": {
+    "layer": "C04_朗园C04宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C05_00": {
+    "layer": "C05_朗园C05宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C06_00": {
+    "layer": "C06_朗园C06宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C07_00": {
+    "layer": "C07_朗园C07宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C08_00": {
+    "layer": "C08_朗园C08宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C09_00": {
+    "layer": "C09_朗园C09宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C10_00": {
+    "layer": "C10_朗园C10宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C11_00": {
+    "layer": "C11_朗园C11宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "C12_00": {
+    "layer": "C12_朗园C12宿舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "S001_00": {
+    "layer": "S001_校车候车处",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "S002_00": {
+    "layer": "S002_保安亭",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "S003_00": {
+    "layer": "S003_鸽舍",
+    "color": [
+      224,
+      220,
+      201
+    ],
+    "category": "building"
+  },
+  "E00001": {
+    "layer": "环境",
+    "color": [
+      219,
+      220,
+      207
+    ],
+    "category": "environment"
+  },
+  "E00002": {
+    "layer": "环境",
+    "color": [
+      89,
+      101,
+      109
+    ],
+    "category": "environment"
+  },
+  "E00003": {
+    "layer": "环境",
+    "color": [
+      195,
+      186,
+      162
+    ],
+    "category": "environment"
+  },
+  "E00004": {
+    "layer": "环境",
+    "color": [
+      112,
+      156,
+      112
+    ],
+    "category": "environment"
+  },
+  "E00005": {
+    "layer": "环境",
+    "color": [
+      80,
+      153,
+      174
+    ],
+    "category": "environment"
+  },
+  "E00006": {
+    "layer": "环境",
+    "color": [
+      166,
+      96,
+      77
+    ],
+    "category": "environment"
+  },
+  "E00007": {
+    "layer": "环境",
+    "color": [
+      104,
+      132,
+      143
+    ],
+    "category": "environment"
+  },
+  "E00008": {
+    "layer": "环境",
+    "color": [
+      230,
+      227,
+      209
+    ],
+    "category": "environment"
+  },
+  "E00009": {
+    "layer": "环境",
+    "color": [
+      72,
+      123,
+      81
+    ],
+    "category": "environment"
+  },
+  "E00010": {
+    "layer": "环境",
+    "color": [
+      129,
+      106,
+      78
+    ],
+    "category": "environment"
+  }
+}

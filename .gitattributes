@@ -1,0 +1,10 @@
+* text=auto
+*.3ds binary
+*.3dm binary
+*.png binary
+*.jpg binary
+*.csv text eol=crlf
+
+# Bundled shaders retain upstream whitespace inside JavaScript string literals.
+index.html -whitespace linguist-generated=true
+package-lock.json linguist-generated=true

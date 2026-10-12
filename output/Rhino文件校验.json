@@ -1,0 +1,13 @@
+{
+  "Rhino_version": 7,
+  "units": "UnitSystem.Meters",
+  "layers": 56,
+  "objects": 133,
+  "building_closed_solids": 68,
+  "environment_objects": 10,
+  "invalid_geometry": [],
+  "named_views": [
+    "鸟瞰_Aerial",
+    "总平面_Plan"
+  ]
+}
