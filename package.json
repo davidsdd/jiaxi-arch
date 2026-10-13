@@ -9,7 +9,9 @@
     "check:3ds": "node scripts/validate_3ds.mjs output/XJTU_InnovationHarbour.3ds",
     "build:worker": "esbuild scripts/model_worker.js --bundle --minify --format=iife --target=es2020 --outfile=tmp/model-worker.bundle.txt",
     "check:interaction": "node scripts/check_interaction.mjs",
-    "check:loading": "node scripts/check_loading.mjs"
+    "check:loading": "node scripts/check_loading.mjs",
+    "check:rendering": "node scripts/check_rendering.mjs",
+    "build:rendering-check": "esbuild scripts/check_rendering_gpu.js --bundle --format=iife --target=es2020 --outfile=tmp/rendering-check.js && python3 scripts/package_rendering_check.py"
   },
   "dependencies": {
     "three": "0.186.1"

@@ -1,3 +1,4 @@
+import {prepareLandscape,stabilizeBuildingMaterial,updateCampusDepthRange} from './surface_rendering.js';
 import {groundHeight} from './ground_height.js';
 import {installMapSelection} from './map_selection.js';
 import {CampusMapControls,setRotationMode,frameCampusBox} from './campus_controls.js';
@@ -13,7 +14,7 @@ let bytes=null;
 const records=data.records;
 const byLayer=new Map(records.map(r=>[r.layer,r]));
 const buildingGroups=new Map();
-let selected=null,category='all',renderer,scene,camera,controls,campus,envMeshes=[],pickMeshes=[],edgeLines=[],campusDiagonal=1,modelReady=false,pendingFocus=null,frameHeight=1750,viewMode='aerial';
+let selected=null,category='all',renderer,scene,camera,controls,campus,envMeshes=[],pickMeshes=[],edgeLines=[],campusDiagonal=1,modelReady=false,pendingFocus=null,renderBounds=null,frameHeight=1750,viewMode='aerial';
 const sidebar=$('sidebar');
 const compact=window.matchMedia('(max-width:720px)');
 function syncSidebar(){sidebar.classList.toggle('closed',compact.matches);$('toggle-sidebar').setAttribute('aria-expanded',String(!sidebar.classList.contains('closed')));}
@@ -91,10 +92,10 @@ $('aerial').addEventListener('click',()=>fullView('aerial'));
 $('plan').addEventListener('click',()=>fullView('plan'));
 $('reset-view').addEventListener('click',()=>{resetInteraction();fullView('aerial');});
 let renderQueued=false;
-function render(){if(!renderer||!modelReady||renderQueued)return;renderQueued=true;requestAnimationFrame(()=>{renderQueued=false;drawScene();});}
+function render(updateShadows=true){if(renderer&&updateShadows!==false)renderer.shadowMap.needsUpdate=true;if(!renderer||!modelReady||renderQueued)return;renderQueued=true;requestAnimationFrame(()=>{renderQueued=false;drawScene();});}
 function drawScene(){
  if(!renderer||!modelReady)return;
- renderer.render(scene,camera);
+ updateCampusDepthRange(camera,renderBounds);renderer.render(scene,camera);
  const north=new THREE.Vector3(0,1,0).transformDirection(camera.matrixWorldInverse);
  $('north-arrow').style.transform=`rotate(${Math.atan2(north.x,north.y)}rad)`;
 }
@@ -121,20 +122,20 @@ try{
  let prepared=0;
  for(const m of meshes){
   const old=Array.isArray(m.material)?m.material:[m.material];
-  const mats=old.map(mat=>{const x=mat.clone();if(materialOverrides[x.name])x.color.setHex(materialOverrides[x.name]);x.flatShading=true;x.shininess=0;x.specular.set(0);x.emissiveIntensity=0;return x;});
+  const mats=old.map(mat=>{const x=mat.clone();if(materialOverrides[x.name])x.color.setHex(materialOverrides[x.name]);x.flatShading=true;x.shininess=0;x.specular.set(0);x.emissiveIntensity=0;stabilizeBuildingMaterial(x);return x;});
   m.material=Array.isArray(m.material)?mats:mats[0];m.receiveShadow=true;
   const layer=data.layers[m.name];const r=layer?byLayer.get(layer.layer):null;
   if(r){
    let group=buildingGroups.get(r.code);if(!group){group=new THREE.Group();group.name=r.code;group.userData.record=r;buildingGroups.set(r.code,group);campus.add(group);}
    group.attach(m);m.castShadow=true;m.userData.code=r.code;pickMeshes.push(m);
-   const edge=new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry,35),new THREE.LineBasicMaterial({color:0x616b5a,transparent:true,opacity:.26}));edge.renderOrder=1;m.add(edge);edgeLines.push(edge);
-  }else{envMeshes.push(m);m.castShadow=mats.some(x=>x.name==='Leaves'||x.name==='Trunk');}
+   const edge=new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry,35),new THREE.LineBasicMaterial({color:0x616b5a,transparent:true,opacity:.26}));edge.material.depthWrite=false;edge.renderOrder=1;m.add(edge);edgeLines.push(edge);
+  }else{m.castShadow=mats.some(x=>x.name==='Leaves'||x.name==='Trunk');envMeshes.push(...prepareLandscape(m));}
   if(++prepared%32===0){reportLoad({phase:'scene',loaded:meshes.length+prepared,total:meshes.length*2});await nextPaint();}
  }
  reportLoad({phase:'scene',loaded:1,total:1});
  envMeshes.forEach(m=>m.visible=$('environment').checked);edgeLines.forEach(e=>e.visible=$('edges').checked);
- scene.add(campus);campusDiagonal=new THREE.Box3().setFromObject(campus).getSize(new THREE.Vector3()).length();
- controls=new CampusMapControls(camera,renderer.domElement);controls.groundHeight=(x,y)=>groundHeight(data,x,y);controls.addEventListener('change',render);controls.listenToKeyEvents(renderer.domElement);syncRotationButton();
+ scene.add(campus);renderBounds=new THREE.Box3().setFromObject(campus);renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;campusDiagonal=new THREE.Box3().setFromObject(campus).getSize(new THREE.Vector3()).length();
+ controls=new CampusMapControls(camera,renderer.domElement);controls.groundHeight=(x,y)=>groundHeight(data,x,y);controls.addEventListener('change',()=>render(false));controls.listenToKeyEvents(renderer.domElement);syncRotationButton();
  renderer.domElement.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if(['+','=','-','_'].includes(e.key)){e.preventDefault();if(e.key==='+'||e.key==='=')controls.dollyIn(.9);else controls.dollyOut(.9);}if(!e.repeat&&e.key.toLowerCase()==='r'){$('rotation-mode').click();}});
  const host=$('viewport');let lastHeight=host.clientHeight;const observer=new ResizeObserver(()=>{const h=host.clientHeight;if(h<1||host.clientWidth<1)return;if(lastHeight>0)frameHeight*=h/lastHeight;lastHeight=h;renderer.setSize(host.clientWidth,h);updateFrustum();render();});observer.observe(host);
  reportLoad({phase:'render',loaded:0,total:1});await nextPaint();modelReady=true;

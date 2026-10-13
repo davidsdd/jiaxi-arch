@@ -4,6 +4,8 @@
 
 鼠标左键拖动平移，右键拖动旋转，滚轮以指针所在位置缩放。触屏单指平移，双指平移或捏合缩放；开启“旋转”后可单指旋转。加载条显示读取、解码、几何解析和首帧绘制的阶段进度与总体百分比。
 
+地面、道路、广场、绿地和水面采用稳定的表面绘制顺序，建筑及树木保留正常遮挡。网页根据校区范围收紧深度裁剪范围，平移时复用未变化的阴影。模型坐标与下载的 CAD 文件保持原始数据。
+
 模型包含 55 栋建筑及道路、广场、绿地、水景和运动场。Rhino 原生文件有 56 个图层：每栋建筑独立一层，环境共用一层。模型单位为米。
 
 **这是依据公开地图和工程资料制作的近似体块模型。** 部分高度、局部体块分区、道路宽度、景观树位与地形为估算，不能作为实测或施工依据。详细来源、精度说明和 Rhino 导入方法见 [使用说明](output/使用说明.md)。
@@ -39,5 +41,7 @@ npm run check:3ds
 ## 数据来源
 
 建筑名称与布局参考 [学校创新港地图](https://vi.xjtu.edu.cn/cxg/cxgdt.htm)，主要高度采用 [公开工程资料](https://24959527.s21i.faiusr.com/61/ABUIABA9GAAgn5zYpQYowILN7gI.pdf)。平面采用 © OpenStreetMap contributors 数据，OSM 及派生地理数据库按 [ODbL](https://www.openstreetmap.org/copyright) 提供；使用时请保留来源与署名。
+
+渲染检查：运行 `npm run check:rendering` 核对表面与深度范围。运行 `npm run build:rendering-check` 后启动根目录的本地服务器，打开 `tmp/rendering-check.html`，可验证实际 WebGL 像素、透明玻璃遮挡和剖切阴影。
 
 原始下载的 PDF、地图图片、临时文件、依赖、缓存和重复压缩包已由 `.gitignore` 排除。
