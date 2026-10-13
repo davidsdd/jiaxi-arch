@@ -45,3 +45,5 @@ npm run check:3ds
 渲染检查：运行 `npm run check:rendering` 核对表面与深度范围。运行 `npm run build:rendering-check` 后启动根目录的本地服务器，打开 `tmp/rendering-check.html`，可验证实际 WebGL 像素、透明玻璃遮挡和剖切阴影。
 
 原始下载的 PDF、地图图片、临时文件、依赖、缓存和重复压缩包已由 `.gitignore` 排除。
+
+屋顶渲染采用固定阴影采样与接收平面的深度校正，减少屋面自遮挡和屏幕采样噪声。GPU 检查另含 800 次屋顶样本，验证共面屋顶细节、不同深度精度、较高建筑遮挡及平移、旋转、缩放；含密西根大学北校区实际屋顶的回归样本。CAD 坐标与下载模型保持不变。
