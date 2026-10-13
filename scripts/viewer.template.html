@@ -11,7 +11,7 @@
 @media(max-width:1000px){.header{padding:0 16px}.offline{display:none}.toolbar{top:12px;left:12px}.toolbar button{font-size:12px;padding:7px 9px}.help-button{top:56px;right:12px;font-size:12px}.legend{left:12px;gap:8px;bottom:53px}.statusbar{padding:8px 12px;font-size:10px}.sidebar{width:280px}.sidebar.closed{margin-left:-280px}}
 @media(max-width:720px){.app{grid-template-rows:67px 1fr}.header{gap:8px;padding:0 13px}.brand{gap:9px}.monogram{width:33px;height:33px;font-size:8px}h1{font-size:16px}.subtitle{font-size:10px}.header-right{gap:5px}.header-right button{font-size:11px;padding:7px 9px}.sidebar{position:absolute;top:67px;bottom:0;left:0;width:280px;z-index:7;box-shadow:15px 0 40px #253b3810}.sidebar.closed{margin-left:-290px}.mobile-toggle{display:inline-block}.help-button{top:60px}.toolbar{max-width:calc(100% - 24px)}.legend{right:52px;font-size:10px}.statusbar{align-items:flex-start;gap:5px}.statusbar .mouse-help{display:none}.detail{max-height:40%}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+#load-progress{width:260px;max-width:75%;height:7px;accent-color:var(--accent)}#load-status{max-width:85%;font-size:11px;line-height:1.6;text-align:center;font-variant-numeric:tabular-nums}</style>
 <!--
 Embedded Three.js license:
 The MIT License
@@ -52,17 +52,17 @@ THE SOFTWARE.
   </aside>
   <section class="viewport" id="viewport" aria-label="校区三维模型">
    <div id="canvas-host"></div><img id="fallback" alt="创新港校区三维模型鸟瞰预览">
-   <div class="toolbar"><button id="toggle-sidebar" class="mobile-toggle" aria-expanded="false" aria-controls="sidebar">建筑列表</button><button id="aerial" class="active" aria-pressed="true">鸟瞰</button><button id="plan" aria-pressed="false">总平面</button><span class="toolbar-sep"></span><button id="reset-view">重置视角</button></div>
+   <div class="toolbar"><button id="toggle-sidebar" class="mobile-toggle" aria-expanded="false" aria-controls="sidebar">建筑列表</button><button id="aerial" class="active" aria-pressed="true">鸟瞰</button><button id="plan" aria-pressed="false">总平面</button><span class="toolbar-sep"></span><button id="reset-view">重置视角</button><button id="rotation-mode" aria-pressed="false">旋转</button></div>
    <button class="help-button" id="open-help">操作与尺寸说明</button>
    <div class="legend" aria-label="模型图例"><span><i class="swatch" style="background:#a14c3c"></i>教学科研</span><span><i class="swatch" style="background:#b89965"></i>学生宿舍</span><span><i class="swatch" style="background:#59656d"></i>道路</span><span><i class="swatch" style="background:#c3baa2"></i>广场</span><span><i class="swatch" style="background:#709c70"></i>绿化</span><span><i class="swatch" style="background:#5099ae"></i>水景</span></div>
    <div class="orientation" aria-label="北向"><div id="north-arrow">↑</div><div>N</div></div>
-   <div class="statusbar"><span id="status-text" role="status">正在载入模型…</span><span class="mouse-help">拖动旋转 · 滚轮缩放 · 右键平移 · 点击建筑查看尺寸</span></div>
+   <div class="statusbar"><span id="status-text" role="status">正在载入模型…</span><span class="mouse-help">拖动平移 · 右键旋转 · 滚轮缩放 · 点击建筑查看尺寸</span></div>
    <div id="hover-tip" role="tooltip"></div>
-   <div class="loading" id="loading"><div class="loader"></div><div>正在打开三维模型</div></div>
+   <div class="loading" id="loading"><div>正在打开三维模型</div><progress id="load-progress" max="100"></progress><span id="load-status" role="status" aria-live="polite">读取模型数据</span></div>
   </section>
  </main>
 </div>
-<dialog id="help-dialog"><h2>查看与尺寸说明</h2><ul><li>鼠标左键拖动旋转，滚轮缩放，右键拖动平移。触控设备使用单指旋转、双指缩放或平移。</li><li>点击建筑，或在左侧列表选择建筑，可查看尺寸并定位。取消建筑复选框可以逐栋隐藏；「显示环境」控制所有室外空间。</li><li>「鸟瞰」与「总平面」切换视角，「保存视图」导出当前画面。</li></ul><p>模型与查看功能已全部内嵌，双击本文件即可打开，无需联网或启动服务器。浏览器需支持 WebGL 2；若未启用，将显示静态预览。</p><p><strong>精度说明：</strong>1 单位 = 1 米。平面采用公开地图地理轮廓，主要最高高度依据公开工程资料；部分高度、局部体块分区、道路宽度和景观树位为估算。地面按相对标高 0 米平整化表达，无法保证所有尺寸与实际建筑完全一致。</p><p>来源：<a href="https://vi.xjtu.edu.cn/cxg/cxgdt.htm" target="_blank" rel="noopener">学校地图</a> · <a href="https://24959527.s21i.faiusr.com/61/ABUIABA9GAAgn5zYpQYowILN7gI.pdf" target="_blank" rel="noopener">工程高度资料</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors / ODbL</a>。模型来源数据整理于 2026-10-12。</p><div class="dialog-footer"><button id="close-help" class="active">知道了</button></div></dialog>
+<dialog id="help-dialog"><h2>查看与尺寸说明</h2><ul><li>鼠标左键拖动平移，右键拖动旋转，滚轮以指针所在位置缩放。触屏单指平移，双指平移或捏合缩放；开启“旋转”后可单指旋转。模型获得焦点时，方向键平移，＋／－缩放。</li><li>点击建筑，或在左侧列表选择建筑，可查看尺寸并定位。取消建筑复选框可以逐栋隐藏；「显示环境」控制所有室外空间。</li><li>「鸟瞰」与「总平面」切换视角，「保存视图」导出当前画面。</li></ul><p>模型与查看功能已全部内嵌，双击本文件即可打开，无需联网或启动服务器。浏览器需支持 WebGL 2；若未启用，将显示静态预览。</p><p><strong>精度说明：</strong>1 单位 = 1 米。平面采用公开地图地理轮廓，主要最高高度依据公开工程资料；部分高度、局部体块分区、道路宽度和景观树位为估算。地面按相对标高 0 米平整化表达，无法保证所有尺寸与实际建筑完全一致。</p><p>来源：<a href="https://vi.xjtu.edu.cn/cxg/cxgdt.htm" target="_blank" rel="noopener">学校地图</a> · <a href="https://24959527.s21i.faiusr.com/61/ABUIABA9GAAgn5zYpQYowILN7gI.pdf" target="_blank" rel="noopener">工程高度资料</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors / ODbL</a>。模型来源数据整理于 2026-10-12。</p><div class="dialog-footer"><button id="close-help" class="active">知道了</button></div></dialog>
 <script id="campus-data" type="application/json">__CAMPUS_DATA__</script>
 <script>__VIEWER_BUNDLE__</script>
 </body>
