@@ -1,3 +1,4 @@
+import {createViewportRenderLoop} from './viewport_rendering.js';
 import {prepareLandscape,prepareBuildingRoofs,stabilizeBuildingMaterial,updateCampusDepthRange,updateCampusDetailDepth,stabilizeCampusShadows,fitCampusSun} from './surface_rendering.js';
 import {groundHeight} from './ground_height.js';
 import {installMapSelection} from './map_selection.js';
@@ -26,7 +27,7 @@ $('close-help').addEventListener('click',()=>$('help-dialog').close());
 $('help-dialog').addEventListener('click',e=>{if(e.target===$('help-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
 function download(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('download-3ds').addEventListener('click',()=>download(new Blob([bytes],{type:'application/octet-stream'}),'XJTU_InnovationHarbour.3ds'));
-$('download-image').addEventListener('click',()=>{if(!renderer||!modelReady)return;drawScene();renderer.domElement.toBlob(blob=>{if(blob)download(blob,'创新港_当前视角.png');},'image/png');});
+$('download-image').addEventListener('click',()=>{if(!renderer||!modelReady)return;viewportLoop.drawNow();renderer.domElement.toBlob(blob=>{if(blob)download(blob,'创新港_当前视角.png');},'image/png');});
 
 const loadLabels={local:'读取本地模型',read:'下载模型数据',decode:'解码模型数据',unpack:'解压模型数据',parse:'解析建筑几何',scene:'准备建筑与景观',render:'绘制首个视图',ready:'加载完成',total:'总体'};
 const loadingView=loadingIndicator($('load-progress'),$('load-status'),key=>loadLabels[key.slice(5)]);
@@ -78,7 +79,7 @@ function selectBuilding(code,focus=false){
  refreshList();if(focus)focusBuilding(code);render();
 }
 function aspect(){const r=$('viewport').getBoundingClientRect();return Math.max(1,r.width)/Math.max(1,r.height);}
-function updateFrustum(){if(!camera)return;const a=aspect();camera.left=-frameHeight*a/2;camera.right=frameHeight*a/2;camera.top=frameHeight/2;camera.bottom=-frameHeight/2;camera.updateProjectionMatrix();if(controls)updateCampusZoomLimit(camera,controls,campusDiagonal);}
+function updateFrustum(){if(!camera)return;const a=aspect();camera.left=-frameHeight*a/2;camera.right=frameHeight*a/2;camera.top=frameHeight/2;camera.bottom=-frameHeight/2;camera.updateProjectionMatrix();if(controls){controls.syncViewOffset();updateCampusZoomLimit(camera,controls,campusDiagonal);}}
 function fitBox(box,mode=viewMode,focus=false){
  frameHeight=frameCampusBox(camera,controls,box,{aspect:aspect(),mode,pad:1.2,distance:3000,direction:new THREE.Vector3(1.3,-.7,1.15),minimumHeight:80,pivotHeight:focus?undefined:groundHeight(data,(box.min.x+box.max.x)/2,(box.min.y+box.max.y)/2)});updateFrustum();render();
 }
@@ -91,8 +92,8 @@ function fullView(mode){if(mode==='plan')resetInteraction();viewMode=mode;setVie
 $('aerial').addEventListener('click',()=>fullView('aerial'));
 $('plan').addEventListener('click',()=>fullView('plan'));
 $('reset-view').addEventListener('click',()=>{resetInteraction();fullView('aerial');});
-let renderQueued=false;
-function render(updateShadows=true){if(renderer&&updateShadows!==false)renderer.shadowMap.needsUpdate=true;if(!renderer||!modelReady||renderQueued)return;renderQueued=true;requestAnimationFrame(()=>{renderQueued=false;drawScene();});}
+let viewportLoop;
+function render(updateShadows=true){if(renderer&&updateShadows!==false)renderer.shadowMap.needsUpdate=true;if(renderer&&modelReady)viewportLoop?.request();}
 function drawScene(){
  if(!renderer||!modelReady)return;
  updateCampusDepthRange(camera,renderBounds);updateCampusDetailDepth(camera,campus,depthBits);renderer.render(scene,camera);
@@ -139,9 +140,9 @@ try{
  scene.add(campus);renderBounds=new THREE.Box3().setFromObject(campus);fitCampusSun(sun,renderBounds);renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;campusDiagonal=new THREE.Box3().setFromObject(campus).getSize(new THREE.Vector3()).length();
  controls=new CampusMapControls(camera,renderer.domElement);controls.groundHeight=(x,y)=>groundHeight(data,x,y);controls.addEventListener('change',()=>render(false));controls.listenToKeyEvents(renderer.domElement);syncRotationButton();
  renderer.domElement.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if(['+','=','-','_'].includes(e.key)){e.preventDefault();if(e.key==='+'||e.key==='=')controls.dollyIn(.9);else controls.dollyOut(.9);}if(!e.repeat&&e.key.toLowerCase()==='r'){$('rotation-mode').click();}});
- const host=$('viewport');let lastHeight=host.clientHeight;const observer=new ResizeObserver(()=>{const h=host.clientHeight;if(h<1||host.clientWidth<1)return;if(lastHeight>0)frameHeight*=h/lastHeight;lastHeight=h;renderer.setSize(host.clientWidth,h);updateFrustum();render();});observer.observe(host);
+ const host=$('canvas-host');viewportLoop=createViewportRenderLoop({host,renderer,resize:ratio=>{frameHeight*=ratio;updateFrustum();},draw:drawScene});const observer=new ResizeObserver(()=>{if(viewportLoop.needsResize())render(false);});observer.observe(host);
  reportLoad({phase:'render',loaded:0,total:1});await nextPaint();modelReady=true;
- renderer.setSize(host.clientWidth,host.clientHeight);fullView('aerial');if(selected)selectBuilding(selected,Boolean(pendingFocus));pendingFocus=null;refreshList();
+ fullView('aerial');if(selected)selectBuilding(selected,Boolean(pendingFocus));pendingFocus=null;refreshList();
  const ray=new THREE.Raycaster();const pointer=new THREE.Vector2();
  function pick(e){const r=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(pointer,camera);const hits=ray.intersectObjects(pickMeshes.filter(m=>m.parent.visible),false);return hits[0]?.object.userData.code??null;}
  installMapSelection(renderer.domElement,e=>selectBuilding(pick(e)));
